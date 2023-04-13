@@ -51,7 +51,7 @@ jobs:
     secrets: inherit
 
 
-  Push-Changes-To-APIM-QA-With-Commit-ID:
+  Push-Changes-To-APIM-QA1-With-Commit-ID:
     if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
     needs: get-commit
     uses: ./.github/workflows/run-publisher-with-env.yaml
