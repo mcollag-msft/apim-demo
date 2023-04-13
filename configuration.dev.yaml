@@ -1,0 +1,10 @@
+apimServiceName: apim-test-instance-qa
+namedValues:
+  - name: ResourceGroupSecret
+    properties:
+      displayName: ResourceGroupSecret
+      value: "{#ResourceGroupSecretValue#}"
+  - name: APIMInstanceSecret
+    properties:
+      displayName: ResourceGroupSecret
+      value: "{#APIMInstanceSecretValue#}"
