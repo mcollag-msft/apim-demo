@@ -38,7 +38,7 @@ jobs:
 
       # Add this step for each APIM environment and pass specific set of secrets that you want replaced in the env section below
       - name: "Perform namevalue secret substitution in configuration.${{ inputs.API_MANAGEMENT_ENVIRONMENT}}.yaml"
-        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'Dev' )
+        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' )
         uses: cschleiden/replace-tokens@v1.1
         with:
           tokenPrefix: "{#"
@@ -54,7 +54,7 @@ jobs:
 
       # Add this step for each APIM environment and pass specific set of secrets that you want replaced in the env section below
       - name: "Perform namevalue secret substitution in configuration.${{ inputs.API_MANAGEMENT_ENVIRONMENT}}.yaml"
-        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'QA' )
+        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'qa' )
         uses: cschleiden/replace-tokens@v1.1
         with:
           tokenPrefix: "{#"
