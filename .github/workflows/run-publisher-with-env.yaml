@@ -22,7 +22,7 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-#    environment: ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
+    environment: ${{ inputs.API_MANAGEMENT_ENVIRONMENT }}
     steps:
       # Run Spectral
       - uses: actions/setup-node@v3
