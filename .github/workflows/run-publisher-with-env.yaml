@@ -3,9 +3,9 @@ name: Run Publisher with Environment
 on:
   workflow_call:
     inputs:
-#      API_MANAGEMENT_ENVIRONMENT:
-#        required: true
-#        type: string
+      API_MANAGEMENT_ENVIRONMENT:
+        required: true
+        type: string
       CONFIGURATION_YAML_PATH:
         required: false
         type: string
@@ -38,23 +38,7 @@ jobs:
 
       # Add this step for each APIM environment and pass specific set of secrets that you want replaced in the env section below
       - name: "Perform namevalue secret substitution in configuration.${{ inputs.API_MANAGEMENT_ENVIRONMENT}}.yaml"
-        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'dev' )
-        uses: cschleiden/replace-tokens@v1.1
-        with:
-          tokenPrefix: "{#"
-          tokenSuffix: "#}"
-          files: ${{ format('["**/configuration.{0}.yaml"]', inputs.API_MANAGEMENT_ENVIRONMENT) }}
-        # specify environment specific secrets to be replaced. For example the QA environment could have a different set secrets to
-        # replace within the configuration.[environment].yaml file
-#        env:
-#          testSecretValue: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
-        env:
-          ResourceGroupSecretValue: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
-          APIMInstanceSecretValue: ${{ secrets.AZURE_MANAGEMENT_SERVICE_NAME }}
-
-      # Add this step for each APIM environment and pass specific set of secrets that you want replaced in the env section below
-      - name: "Perform namevalue secret substitution in configuration.${{ inputs.API_MANAGEMENT_ENVIRONMENT}}.yaml"
-        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'qa' )
+        if: (inputs.API_MANAGEMENT_ENVIRONMENT == 'QA' )
         uses: cschleiden/replace-tokens@v1.1
         with:
           tokenPrefix: "{#"
