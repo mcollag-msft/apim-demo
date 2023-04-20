@@ -2,7 +2,7 @@
   "properties": {
     "apiRevision": "1",
     "authenticationSettings": {},
-    "description": "Test Description Change Section B. A sample API with information related to a technical conference.  The available resources  include *Speakers*, *Sessions* and *Topics*.  A single write operation is available to provide  feedback on a session.",
+    "description": "Test Description Change Section B2. A sample API with information related to a technical conference.  The available resources  include *Speakers*, *Sessions* and *Topics*.  A single write operation is available to provide  feedback on a session.",
     "displayName": "Demo Conference API",
     "isCurrent": true,
     "path": "",
