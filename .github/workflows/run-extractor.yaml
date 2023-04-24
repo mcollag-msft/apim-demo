@@ -33,7 +33,7 @@ jobs:
   Extract-Changes-To-APIM-Dev-With-Commit-ID:
     if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
     needs: get-commit
-    uses: ./configuration.extractor.yaml #./.github/workflows/run-publisher-with-env.yaml
+    uses: ./.github/workflows/run-extractor-with-env.yaml
     with:
       API_MANAGEMENT_ENVIRONMENT: Dev # change this to match the dev environment created in settings
       COMMIT_ID: ${{ needs.get-commit.outputs.commit_id }}
@@ -45,7 +45,7 @@ jobs:
   Extract-Changes-To-APIM-Dev-Without-Commit-ID:
     if: ( github.event.inputs.COMMIT_ID_CHOICE == 'publish-all-artifacts-in-repo' )
     needs: get-commit
-    uses: ./configuration.extractor.yaml #./.github/workflows/run-publisher-with-env.yaml
+    uses: ./.github/workflows/run-extractor-with-env.yaml
     with:
       API_MANAGEMENT_ENVIRONMENT: Dev # change this to match the dev environment created in settings
       CONFIGURATION_YAML_PATH: configuration.extractor.yaml # make sure the file is available at the root
