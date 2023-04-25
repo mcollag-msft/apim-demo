@@ -1,4 +1,4 @@
-name: Run - Extractor
+name: Run - Extractor with Environment
 
 on:
   workflow_call:
