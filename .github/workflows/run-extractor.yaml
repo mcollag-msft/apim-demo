@@ -38,6 +38,7 @@ jobs:
       API_MANAGEMENT_ENVIRONMENT: Dev # change this to match the dev environment created in settings
       COMMIT_ID: ${{ needs.get-commit.outputs.commit_id }}
       CONFIGURATION_YAML_PATH: configuration.extractor.yaml # make sure the file is available at the root
+      API_SPECIFICATION_FORMAT: OpenAPIV3Yaml
       API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts-extract # change this to the artifacts folder
     secrets: inherit
 
@@ -49,6 +50,7 @@ jobs:
     with:
       API_MANAGEMENT_ENVIRONMENT: Dev # change this to match the dev environment created in settings
       CONFIGURATION_YAML_PATH: configuration.extractor.yaml # make sure the file is available at the root
+      API_SPECIFICATION_FORMAT: OpenAPIV3Yaml
       API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts-extract # change this to the artifacts folder
     secrets: inherit
 
