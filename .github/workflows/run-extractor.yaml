@@ -3,7 +3,7 @@ name: Run - Extractor
 on:
   # Triggers the workflow on pull request events but only for the main branch
   pull_request:
-    branches: [main]
+    branches: [development]
     types: [closed]
 
   # Allows you to run this workflow manually from the Actions tab
@@ -30,36 +30,38 @@ jobs:
     outputs:
       commit_id: ${{ steps.commit.outputs.commit_id }}
   #Publish with Commit ID
-  Push-Changes-To-APIM-Dev-With-Commit-ID:
+  Extract-Changes-To-APIM-Dev-With-Commit-ID:
     if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
     needs: get-commit
-    uses: ./.github/workflows/run-publisher-with-env.yaml
+    uses: ./.github/workflows/run-extractor-with-env.yaml
     with:
       API_MANAGEMENT_ENVIRONMENT: Dev # change this to match the dev environment created in settings
       COMMIT_ID: ${{ needs.get-commit.outputs.commit_id }}
-      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts # change this to the artifacts folder
+      CONFIGURATION_YAML_PATH: configuration.extractor.yaml # make sure the file is available at the root
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts-extract # change this to the artifacts folder
     secrets: inherit
 
   #Publish without Commit ID. Publishes all artifacts that reside in the artifacts forlder
-  Push-Changes-To-APIM-Dev-Without-Commit-ID:
+  Extract-Changes-To-APIM-Dev-Without-Commit-ID:
     if: ( github.event.inputs.COMMIT_ID_CHOICE == 'publish-all-artifacts-in-repo' )
     needs: get-commit
-    uses: ./.github/workflows/run-publisher-with-env.yaml
+    uses: ./.github/workflows/run-extractor-with-env.yaml
     with:
       API_MANAGEMENT_ENVIRONMENT: Dev # change this to match the dev environment created in settings
-      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts # change this to the artifacts folder
+      CONFIGURATION_YAML_PATH: configuration.extractor.yaml # make sure the file is available at the root
+      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts-extract # change this to the artifacts folder
     secrets: inherit
 
-  Push-Changes-To-APIM-QA-With-Commit-ID:
-    if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
-    needs: [get-commit, Push-Changes-To-APIM-Dev-With-Commit-ID]
-    uses: ./.github/workflows/run-publisher-with-env.yaml
-    with:
-      API_MANAGEMENT_ENVIRONMENT: QA # change this to match the qa environment created in settings
-      CONFIGURATION_YAML_PATH: configuration.qa.yaml # make sure the file is available at the root
-      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts # change this to the artifacts folder
-      COMMIT_ID: ${{ needs.get-commit.outputs.commit_id }}
-    secrets: inherit
+#  Extract-Changes-To-APIM-QA-With-Commit-ID:
+#    if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
+#    needs: [get-commit, Push-Changes-To-APIM-Dev-With-Commit-ID]
+#    uses: ./configuration.extractor.yaml #./.github/workflows/run-publisher-with-env.yaml
+#    with:
+#      API_MANAGEMENT_ENVIRONMENT: QA # change this to match the qa environment created in settings
+#      CONFIGURATION_YAML_PATH: configuration.qa.yaml # make sure the file is available at the root
+#      API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: apimartifacts-extract # change this to the artifacts folder
+#      COMMIT_ID: ${{ needs.get-commit.outputs.commit_id }}
+#    secrets: inherit
 
 #  Push-Changes-To-APIM-Prod-With-Commit-ID:
 #    if: (github.event.inputs.COMMIT_ID_CHOICE == 'publish-artifacts-in-last-commit' || github.event.inputs.COMMIT_ID_CHOICE == '')
