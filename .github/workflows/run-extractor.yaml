@@ -17,6 +17,22 @@ on:
         options:
           - "publish-artifacts-in-last-commit"
           - "publish-all-artifacts-in-repo"
+      CONFIGURATION_YAML_PATH:
+        description: 'Choose Whether to extract all Apis or extract apis listed an extraction configuration file'     
+        required: true
+        type: choice
+        options:
+        - Extract All APIs
+        - configuration.extractor.yaml
+      API_SPECIFICATION_FORMAT:
+        description: 'API Specification Format'     
+        required: true
+        type: choice
+        options:
+        - OpenAPIV3Yaml 
+        - OpenAPIV3Json
+        - OpenAPIV2Yaml
+        - OpenAPIV2Json
 
 jobs:
   get-commit:
