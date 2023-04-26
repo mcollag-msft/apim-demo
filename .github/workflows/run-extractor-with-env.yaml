@@ -7,8 +7,8 @@ on:
         required: true
         type: string
       CONFIGURATION_YAML_PATH:
-        required: true
-        type: string
+       required: true
+       type: string
       COMMIT_ID:
         required: false
         type: string
@@ -51,7 +51,7 @@ jobs:
       - uses: actions/checkout@v3
           
       - name: Run extractor without Config Yaml
-        if: ${{ github.inputs.CONFIGURATION_YAML_PATH == 'Extract All APIs' }}
+        if: ${{ github.event.inputs.CONFIGURATION_YAML_PATH == 'Extract All APIs' }}
         env:
           AZURE_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
@@ -60,7 +60,7 @@ jobs:
           AZURE_RESOURCE_GROUP_NAME: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts-extract  # change this to the artifacts folder
-          API_SPECIFICATION_FORMAT: ${{ inputs.API_SPECIFICATION_FORMAT }} #${{ github.event.inputs.API_SPECIFICATION_FORMAT }} 
+          API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }} #${{ github.event.inputs.API_SPECIFICATION_FORMAT }} 
         run: |
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
@@ -92,8 +92,8 @@ jobs:
           AZURE_RESOURCE_GROUP_NAME: ${{ secrets.AZURE_RESOURCE_GROUP_NAME }}
           API_MANAGEMENT_SERVICE_NAME: ${{ secrets.API_MANAGEMENT_SERVICE_NAME }}
           API_MANAGEMENT_SERVICE_OUTPUT_FOLDER_PATH: ${{ GITHUB.WORKSPACE }}/apimartifacts-extract  # change this to the artifacts folder
-          API_SPECIFICATION_FORMAT: ${{ inputs.API_SPECIFICATION_FORMAT }} #${{ github.event.inputs.API_SPECIFICATION_FORMAT }} 
-          CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/${{ inputs.CONFIGURATION_YAML_PATH }} #${{ GITHUB.WORKSPACE }}/${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
+          API_SPECIFICATION_FORMAT: ${{ github.event.inputs.API_SPECIFICATION_FORMAT }} #${{ github.event.inputs.API_SPECIFICATION_FORMAT }} 
+          CONFIGURATION_YAML_PATH:  ${{ GITHUB.WORKSPACE }}/${{ github.event.inputs.CONFIGURATION_YAML_PATH }} #${{ GITHUB.WORKSPACE }}/${{ github.event.inputs.CONFIGURATION_YAML_PATH }}
         run: |
           Set-StrictMode -Version Latest
           $ErrorActionPreference = "Stop"
